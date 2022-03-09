@@ -1,0 +1,11 @@
+scene.setBackgroundColor(15)
+let speed = 0
+scroller.setLayerImage(scroller.BackgroundLayer.Layer0, assets.image`test1`)
+scroller.setLayerImage(scroller.BackgroundLayer.Layer1, assets.image`test0`)
+scroller.setLayerImage(scroller.BackgroundLayer.Layer2, assets.image`test2`)
+scroller.scrollBackgroundWithSpeed(-30, 0, scroller.BackgroundLayer.Layer0)
+scroller.scrollBackgroundWithSpeed(-50, 0, scroller.BackgroundLayer.Layer1)
+scroller.scrollBackgroundWithSpeed(-60, 0, scroller.BackgroundLayer.Layer2)
+let ship = sprites.create(assets.image`Enterprise`, SpriteKind.Player)
+controller.moveSprite(ship)
+ship.setStayInScreen(true)
