@@ -81,8 +81,8 @@ assets.image`Planet3`,
 assets.image`Planet4`
 ]
 forever(function () {
+    pause(1000 * randint(2, 10))
     if (state == travel) {
-        pause(1000 * randint(2, 10))
         orb = sprites.create(planets[randint(0, 3)], SpriteKind.ptype)
         orb.setPosition(152, randint(20, 100))
         orb.setVelocity(-37, 0)
