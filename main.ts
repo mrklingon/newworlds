@@ -19,10 +19,12 @@ function setSpace () {
     scroller.setLayerImage(scroller.BackgroundLayer.Layer0, assets.image`test1`)
     scroller.setLayerImage(scroller.BackgroundLayer.Layer1, assets.image`test0`)
     scroller.setLayerImage(scroller.BackgroundLayer.Layer2, assets.image`test2`)
-    scroller.scrollBackgroundWithSpeed(-30, 0, scroller.BackgroundLayer.Layer0)
-    scroller.scrollBackgroundWithSpeed(-50, 0, scroller.BackgroundLayer.Layer1)
-    scroller.scrollBackgroundWithSpeed(-60, 0, scroller.BackgroundLayer.Layer2)
-    ship = sprites.create(assets.image`Enterprise`, SpriteKind.Player)
+    setScroll(dir)
+    if (dir == -1) {
+        ship = sprites.create(assets.image`Enterprise`, SpriteKind.Player)
+    } else {
+        ship = sprites.create(assets.image`Enterprise0`, SpriteKind.Player)
+    }
     controller.moveSprite(ship)
     ship.setStayInScreen(true)
 }
@@ -35,6 +37,11 @@ controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
         }
     }
 })
+function setScroll (drc: number) {
+    scroller.scrollBackgroundWithSpeed(drc * 30, 0, scroller.BackgroundLayer.Layer0)
+    scroller.scrollBackgroundWithSpeed(drc * 50, 0, scroller.BackgroundLayer.Layer1)
+    scroller.scrollBackgroundWithSpeed(drc * 60, 0, scroller.BackgroundLayer.Layer2)
+}
 controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
     if (state == travel) {
         doPhaser()
@@ -49,9 +56,23 @@ function doMissTXT (text: string) {
     textSprite = textsprite.create(text)
     textSprite.setPosition(95, 44)
 }
+controller.left.onEvent(ControllerButtonEvent.Pressed, function () {
+    if (state == travel) {
+        ship.setImage(assets.image`Enterprise0`)
+        dir = 1
+        setScroll(dir)
+    }
+})
+controller.right.onEvent(ControllerButtonEvent.Pressed, function () {
+    if (state == travel) {
+        ship.setImage(assets.image`Enterprise`)
+        dir = -1
+        setScroll(dir)
+    }
+})
 function doPhaser () {
     if (state == travel) {
-        zap = sprites.createProjectileFromSprite(assets.image`bolt`, ship, 200, 0)
+        zap = sprites.createProjectileFromSprite(assets.image`bolt`, ship, -200 * dir, 0)
         music.pewPew.play()
         zap.setFlag(SpriteFlag.AutoDestroy, true)
     }
@@ -64,7 +85,8 @@ let state = 0
 let places: string[] = []
 let lcs = 0
 let travel = 0
-let speed = 0
+let dir = 0
+dir = -1
 travel = 1
 lcs = 2
 setSpace()
