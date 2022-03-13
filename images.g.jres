@@ -64,6 +64,41 @@
         "mimeType": "image/x-mkcd-f4",
         "displayName": "Enterprise0"
     },
+    "image11": {
+        "data": "hwQQABAAAAAAAAAAAAAAAAAADwAPAAAAAP8P//8PAAAAX/Vf//8AAABfVVVV9Q8AAF9VVVVVDwAAX1VVVVUPAPBVVVVVVQ8A8P9fVVVV/wAAAP9fVVX1AAAAAF9VVfUPAADwX1VVVQ8A8P9VVVVVDwDwVVVVVfUPAPBfVVVV9QAAAP//////AA==",
+        "mimeType": "image/x-mkcd-f4",
+        "displayName": "myImage"
+    },
+    "image12": {
+        "data": "hwQQABAAAAAAAAAAAAAAAAAAAAAA//8AAAAAAP/P/P8AAP//z8zM/ADwz8zMzMz8AP/MzPzMzPwA/8zMzP/M/PD/zMzM/M/8AM/M/8zMz/wA/8zP/P/M/ADw/M/88M/88M/MzP8Az/8Az8zMDwD/DwD//88PAAAAAAAA8A8AAAAAAAAAAAAAAA==",
+        "mimeType": "image/x-mkcd-f4",
+        "displayName": "myImage0"
+    },
+    "image13": {
+        "data": "hwQQABAAAAAAAAAAAAAAAAAAAPAA8AAAAADw///w/wAAAP//8i/yAADwLyIiIvIAAPAiIiIi8gAA8CIiIiLyAADwIiIiIiIPAP8iIiLy/w8ALyIi8v8AAPAvIiLyAAAA8CIiIvIPAADwIiIiIv8PAPAvIiIiIg8AAC8iIiLyDwAA//////8AAA==",
+        "mimeType": "image/x-mkcd-f4",
+        "displayName": "myImage1"
+    },
+    "image14": {
+        "data": "hwQQABAAAAAAAAAAAAAAAAAAAAAPAAAAAAAAAP8PAAAAAAAA//8AAAAPAAAA8A8AAP8PAAB/DwAAf///AH8PAPB3d/f/fw8A8P9/d3d//wAAAP9/d3/3AAAAAH93f/cPAADwf3d3dw8A8P93d3d3DwDwd3d3d/cPAPB/d3d39wAAAP//////AA==",
+        "mimeType": "image/x-mkcd-f4",
+        "displayName": "myImage2"
+    },
+    "image15": {
+        "data": "hwQQABAAAAAAAAAA8P8PAAAAAAD/zA8AAP//D8/MDwAAr6oPz///D/Cvqg//r6//APD6/6qqr/oA//r///qq+gCvqv+qqqr68P+qqqqqqvoA/6qqqqqq+gD/qqqqqqr6APCvqqqqqvoAAP//r6qq+gAAAAD/r/r/AAAAAAD//wAAAAAAAAAAAA==",
+        "mimeType": "image/x-mkcd-f4",
+        "displayName": "myImage3"
+    },
+    "image9": {
+        "data": "hwQgABAAAAAAAIiCiAAAAAAAWFGFCAAAAABYUVUIAAAAAFhRVQgAAAAAWFFViAAAAACAUVWFCAAAAIBRFVUIAAAAgBERVQgAAACAURFRiAAAAFhREVGFAACAVVERUYUAAIBVURFRiAAAiFVREVEIAABYFVURUQgAAFgVVRFRCAAAWBUVEFEIAABYFRURUQgAAFgVERFVCAAAWBURVVUIAABYERFVhQAAAFgRUVWIAAAAWBFRVQgAAABYEVWFCAAAAFgRVYUAAAAAWBFVhQAAAABYFVWIAAAAAFgVhQgAAAAAWBWFAAAAAACAFYUAAAAAAIAVhQAAAAAAiBWFAAAAAACIiAgAAAAA",
+        "mimeType": "image/x-mkcd-f4",
+        "displayName": "Enterprise-hit"
+    },
+    "image10": {
+        "data": "hwQgABAAAAAAiIgIAAAAAACIFYUAAAAAAIAVhQAAAAAAgBWFAAAAAABYFYUAAAAAAFgVhQgAAAAAWBVViAAAAABYEVWFAAAAAFgRVYUAAAAAWBFVhQgAAABYEVFVCAAAAFgRUVWIAAAAWBERVYUAAABYFRFVVQgAAFgVERFVCAAAWBUVEVEIAABYFRUQUQgAAFgVVRFRCAAAWBVVEVEIAACIVVERUQgAAIBVURFRiAAAgFVREVGFAAAAWFERUYUAAACAURFRiAAAAIAREVUIAAAAgFEVVQgAAACAUVWFCAAAAFhRVYgAAAAAWFFVCAAAAABYUVUIAAAAAFhRhQgAAAAAiIKIAAAA",
+        "mimeType": "image/x-mkcd-f4",
+        "displayName": "Enterprise-hit0"
+    },
     "*": {
         "mimeType": "image/x-mkcd-f4",
         "dataEncoding": "base64",
