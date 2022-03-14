@@ -51,7 +51,9 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
     if (state == lcs) {
         sprites.destroyAllSpritesOfKind(SpriteKind.Text)
         sprites.destroyAllSpritesOfKind(SpriteKind.ptype)
-        doMissTXT("Mission to " + places[randint(0, 3)], job[randint(0, 3)])
+        sprites.destroyAllSpritesOfKind(SpriteKind.asteroid)
+        missdest = randint(0, 3)
+        doMissTXT("Mission to " + places[missdest], job[randint(0, 3)])
     }
 })
 sprites.onOverlap(SpriteKind.Player, SpriteKind.asteroid, function (sprite, otherSprite) {
@@ -66,6 +68,15 @@ function doMissTXT (dest: string, mission: string) {
     ts2.setPosition(96, 96)
     destination = dest
 }
+sprites.onOverlap(SpriteKind.Player, SpriteKind.ptype, function (sprite, otherSprite) {
+    setScroll(0)
+    otherSprite.setVelocity(0, 0)
+    sprite.setVelocity(0, 0)
+    sprite.sayText("Arrived at" + places[missdest], 500, true)
+    otherSprite.setVelocity(50, -47)
+    setScroll(dir)
+    info.changeScoreBy(50)
+})
 controller.left.onEvent(ControllerButtonEvent.Pressed, function () {
     if (state == travel) {
         ship.setImage(assets.image`Enterprise0`)
@@ -105,10 +116,12 @@ sprites.onOverlap(SpriteKind.Projectile, SpriteKind.asteroid, function (sprite, 
     music.knock.play()
     otherSprite.destroy(effects.fire, 500)
 })
+let planet: Sprite = null
 let ast: Sprite = null
 let zap: Sprite = null
 let ts2: TextSprite = null
 let textSprite: TextSprite = null
+let missdest = 0
 let ship: Sprite = null
 let state = 0
 let destination = ""
@@ -137,7 +150,7 @@ assets.image`Planet4`
 job = [
 "transfer supplies",
 "transfer refugees",
-"consult with planetary council",
+"consulting",
 "gather assistance"
 ]
 let rocks = [
@@ -155,5 +168,15 @@ forever(function () {
         ast.setPosition(randint(20, 100), randint(20, 100))
         ast.setVelocity(randint(-40, 40), randint(-40, 40))
         ast.setFlag(SpriteFlag.AutoDestroy, true)
+    }
+})
+forever(function () {
+    pause(1000 * randint(2, 10))
+    if (state == travel && destination != "") {
+        destination = ""
+        planet = sprites.create(planets[missdest], SpriteKind.ptype)
+        planet.setPosition(152, randint(20, 100))
+        planet.setVelocity(-37, 0)
+        planet.setFlag(SpriteFlag.AutoDestroy, true)
     }
 })
