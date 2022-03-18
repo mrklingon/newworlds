@@ -51,11 +51,16 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
         doPhaser()
     }
     if (state == lcs) {
-        sprites.destroyAllSpritesOfKind(SpriteKind.Text)
-        sprites.destroyAllSpritesOfKind(SpriteKind.ptype)
-        sprites.destroyAllSpritesOfKind(SpriteKind.asteroid)
-        missdest = randint(0, 3)
-        doMissTXT("Mission to " + places[missdest], job[randint(0, 3)])
+        if (destination == "") {
+            sprites.destroyAllSpritesOfKind(SpriteKind.Text)
+            sprites.destroyAllSpritesOfKind(SpriteKind.ptype)
+            sprites.destroyAllSpritesOfKind(SpriteKind.asteroid)
+            missdest = randint(0, 3)
+            doMissTXT("Mission to " + places[missdest], job[randint(0, 3)])
+        } else {
+            M5()
+            setSpace()
+        }
     }
 })
 sprites.onOverlap(SpriteKind.Player, SpriteKind.asteroid, function (sprite, otherSprite) {
