@@ -4,6 +4,7 @@ namespace SpriteKind {
 }
 function doLCARS () {
     state = lcs
+    droid = 0
     sprites.destroyAllSpritesOfKind(SpriteKind.Player)
     sprites.destroyAllSpritesOfKind(SpriteKind.ptype)
     sprites.destroyAllSpritesOfKind(SpriteKind.asteroid)
@@ -21,12 +22,8 @@ function setSpace () {
     scroller.setLayerImage(scroller.BackgroundLayer.Layer0, assets.image`test1`)
     scroller.setLayerImage(scroller.BackgroundLayer.Layer1, assets.image`test0`)
     scroller.setLayerImage(scroller.BackgroundLayer.Layer2, assets.image`test2`)
+    ship = sprites.create(assets.image`Enterprise`, SpriteKind.Player)
     setScroll(dir)
-    if (dir == -1) {
-        ship = sprites.create(assets.image`Enterprise`, SpriteKind.Player)
-    } else {
-        ship = sprites.create(assets.image`Enterprise0`, SpriteKind.Player)
-    }
     controller.moveSprite(ship)
     ship.setStayInScreen(true)
 }
@@ -43,6 +40,11 @@ function setScroll (drc: number) {
     scroller.scrollBackgroundWithSpeed(drc * 30, 0, scroller.BackgroundLayer.Layer0)
     scroller.scrollBackgroundWithSpeed(drc * 50, 0, scroller.BackgroundLayer.Layer1)
     scroller.scrollBackgroundWithSpeed(drc * 60, 0, scroller.BackgroundLayer.Layer2)
+    if (drc == -1) {
+        ship.setImage(assets.image`Enterprise`)
+    } else {
+        ship.setImage(assets.image`Enterprise0`)
+    }
 }
 controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
     if (state == travel) {
@@ -85,12 +87,24 @@ controller.left.onEvent(ControllerButtonEvent.Pressed, function () {
     }
 })
 controller.right.onEvent(ControllerButtonEvent.Pressed, function () {
+    if (controller.left.isPressed()) {
+        M5()
+    }
     if (state == travel) {
         ship.setImage(assets.image`Enterprise`)
         dir = -1
         setScroll(dir)
     }
 })
+function M5 () {
+    droid += 1
+    if (droid > 1) {
+        droid = 0
+        ship.sayText("M5 deactivated", 500, false)
+    } else {
+        ship.sayText("M5 activated", 500, false)
+    }
+}
 function hitShip () {
     music.knock.play()
     scene.cameraShake(4, 500)
@@ -116,20 +130,22 @@ sprites.onOverlap(SpriteKind.Projectile, SpriteKind.asteroid, function (sprite, 
     music.knock.play()
     otherSprite.destroy(effects.fire, 500)
 })
-let planet: Sprite = null
 let ast: Sprite = null
+let planet: Sprite = null
 let zap: Sprite = null
 let ts2: TextSprite = null
 let textSprite: TextSprite = null
 let missdest = 0
 let ship: Sprite = null
 let state = 0
+let droid = 0
 let destination = ""
 let job: string[] = []
 let places: string[] = []
 let lcs = 0
 let travel = 0
 let dir = 0
+game.splash("Pilot the USS Verity", " for Romulan rescue missions")
 dir = -1
 travel = 1
 info.setLife(10)
@@ -161,6 +177,17 @@ assets.image`myImage2`,
 assets.image`myImage3`
 ]
 destination = ""
+droid = 0
+forever(function () {
+    pause(1000 * randint(2, 10))
+    if (state == travel && destination != "") {
+        destination = ""
+        planet = sprites.create(planets[missdest], SpriteKind.ptype)
+        planet.setPosition(152, randint(20, 100))
+        planet.setVelocity(-37, 0)
+        planet.setFlag(SpriteFlag.AutoDestroy, true)
+    }
+})
 forever(function () {
     pause(500 * randint(2, 10))
     if (state == travel) {
@@ -171,12 +198,19 @@ forever(function () {
     }
 })
 forever(function () {
-    pause(1000 * randint(2, 10))
-    if (state == travel && destination != "") {
-        destination = ""
-        planet = sprites.create(planets[missdest], SpriteKind.ptype)
-        planet.setPosition(152, randint(20, 100))
-        planet.setVelocity(-37, 0)
-        planet.setFlag(SpriteFlag.AutoDestroy, true)
+    if (1 == droid) {
+        for (let index = 0; index < 4; index++) {
+            ship.x += randint(-10, 10)
+            ship.y += randint(-10, 10)
+            if (5 < randint(0, 10)) {
+                dir = -1
+            } else {
+                dir = 1
+            }
+            setScroll(dir)
+            doPhaser()
+            pause(500)
+            sprites.destroyAllSpritesOfKind(SpriteKind.Projectile)
+        }
     }
 })
